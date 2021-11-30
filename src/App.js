@@ -17,8 +17,10 @@ import CreateCats from "./views/CreateCats";
 import EditCats from "./views/EditCats";
 import CreateItems from "./views/CreateItems";
 import EditItems from "./views/EditItems";
+import Cart from "./views/Cart";
+import { Container } from 'react-bootstrap';
+import CheckoutSuccess from './views/CheckoutSuccess';
 
-import { Container } from 'react-bootstrap'
 
 export default class App extends Component {
   constructor() {
@@ -167,6 +169,19 @@ export default class App extends Component {
                 render={()=><Shop addToCart={this.addToCart}/>} />
             <ProtectedRoute exact path ="/item/:id" token={this.state.token} 
                 render={(props)=><SingleItem {...props}/>} />
+
+            <ProtectedRoute exact path ="/cart" token={this.state.token} 
+                render={()=><Cart 
+                            cart={this.state.cart} 
+                            removeFromCart={this.removeFromCart} 
+                            removeAllFromCart={this.removeAllFromCart}
+                            getCartItemTotal={this.getCartItemTotal}
+                            getCartTotalPrice={this.getCartTotalPrice}
+                            />} />
+
+              <ProtectedRoute exact path ="/checkoutSuccess" token={this.state.token} 
+                render={()=><CheckoutSuccess clearCart={this.clearCart}/>} />
+           
            
             <AdminRoute exact path ="/createcats" isAdmin={this.state.isAdmin} token={this.state.token} 
                 render={()=><CreateCats/>} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export default class NavBar extends Component {
     render() {
@@ -38,7 +38,11 @@ export default class NavBar extends Component {
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
                             }
                         </Nav>
-                        <span className="float-end" style={{color:'white'}}>total: ${this.props.getCartTotalPrice().toFixed(2)}, items:{this.props.getCartItemTotal()}</span>
+                        <span className="float-end">
+                            <Link to="/cart" style={{color:'white', textDecoration:'none'}}>
+                                <ShoppingCartIcon/>({this.props.getCartItemTotal()})  ${this.props.getCartTotalPrice().toFixed(2)}
+                            </Link>
+                        </span>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
